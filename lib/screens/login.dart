@@ -77,7 +77,9 @@ class Login extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: Colors.white),
+                        hintStyle: TextStyle(color: Colors.white),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(
@@ -88,11 +90,15 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        labelText: 'Password',
+                        labelStyle: TextStyle(color: Colors.white),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide(
