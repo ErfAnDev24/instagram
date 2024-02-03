@@ -88,6 +88,21 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Color(0xffC5C5C5),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               )),
         ),
