@@ -85,10 +85,11 @@ class SwitchAccount extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 244, 54, 158),
-                          foregroundColor: Colors.white),
-                      child: Text('Confirm'),
+                      style: Theme.of(context).elevatedButtonTheme.style,
+                      child: Text(
+                        'Confirm',
+                        style: TextStyle(fontFamily: 'winter'),
+                      ),
                     ),
                     SizedBox(
                       height: 15,
@@ -96,7 +97,9 @@ class SwitchAccount extends StatelessWidget {
                     Text(
                       'switch account',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'winter'),
                     ),
                   ],
                 ),

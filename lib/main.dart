@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/screens/SwitchAccount.dart';
+import 'package:instagram/screens/login.dart';
 
 void main() {
   runApp(Application());
@@ -11,6 +12,16 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: SwitchAccount());
+        theme: ThemeData(
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 244, 54, 158),
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+            ),
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: Login());
   }
 }
