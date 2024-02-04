@@ -7,6 +7,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff1C1F2E),
+        title: Image(
+          image: AssetImage('images/minilogo.png'),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           color: Color(0xff1C1F2E),
