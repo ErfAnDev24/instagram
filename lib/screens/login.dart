@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final holderOne = FocusNode();
+  final holderTwo = FocusNode();
+
+  @override
+  void initState() {
+    holderOne.addListener(() {
+      setState(() {});
+    });
+
+    holderTwo.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,79 +58,60 @@ class Login extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xff1C1F2E),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
+            decoration: BoxDecoration(
+              color: Color(0xff1C1F2E),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
               ),
+            ),
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   SizedBox(
                     width: double.infinity,
                     height: 50,
                   ),
+                  getTopTextForLoginContext(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  getEmailTextField(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  getPasswordTextField(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('sign in'),
+                    style: Theme.of(context).elevatedButtonTheme.style,
+                  ),
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        'Sign in',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'winter'),
+                        'Dont have an account? /',
+                        style:
+                            TextStyle(color: Colors.grey, fontFamily: 'winter'),
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Image(
-                        image: AssetImage('images/minilogo.png'),
-                      ),
+                      Text(
+                        'Sign up',
+                        style: TextStyle(
+                            color: Colors.white, fontFamily: 'winter'),
+                      )
                     ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(color: Colors.white),
-                        hintStyle: TextStyle(color: Colors.white),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
-                            color: Color(0xffC5C5C5),
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.white),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(
-                            color: Color(0xffC5C5C5),
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  )
                 ],
-              )),
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -129,5 +130,92 @@ class Login extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget getTopTextForLoginContext() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          'Sign in',
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontFamily: 'winter'),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Image(
+          image: AssetImage('images/minilogo.png'),
+        ),
+      ],
+    );
+  }
+
+  Widget getEmailTextField() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: TextField(
+        focusNode: holderOne,
+        style: TextStyle(
+          color: Color(0xffF35383),
+        ),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 12),
+          labelText: 'Email',
+          labelStyle: TextStyle(
+              color: holderOne.hasFocus ? Color(0xffF35383) : Colors.white),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Color(0xffF35383), width: 2),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: Color(0xffC5C5C5),
+              width: 2,
+            ),
+          ),
+        ),
+        cursorColor: Color(0xffF35383),
+      ),
+    );
+  }
+
+  Widget getPasswordTextField() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: TextField(
+        focusNode: holderTwo,
+        style: TextStyle(
+          color: Color(0xffF35383),
+        ),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 12),
+          labelText: 'Password',
+          labelStyle: TextStyle(
+            color: holderTwo.hasFocus ? Color(0xffF35383) : Colors.white,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Color(0xffF35383), width: 2),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(
+              color: Color(0xffC5C5C5),
+              width: 2,
+            ),
+          ),
+        ),
+        cursorColor: Color(0xffF35383),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    holderOne.dispose();
+    super.dispose();
   }
 }
