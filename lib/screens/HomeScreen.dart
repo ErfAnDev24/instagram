@@ -27,13 +27,34 @@ class HomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color(0xff1C1F2E),
         ),
-        child: Center(child: getStorySection()),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [getStorySection(), getPostList()],
+          ),
+        ),
       ),
     );
   }
 
+  Widget getPostList() {
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 9,
+      itemBuilder: (context, index) {
+        return getPost();
+      },
+    );
+  }
+
   Widget getPost() {
-    return Column(children: [getPostHeader(), getPostContent()]);
+    return Column(children: [
+      SizedBox(
+        height: 20,
+      ),
+      getPostHeader(),
+      getPostContent()
+    ]);
   }
 
   Widget getPostContent() {
