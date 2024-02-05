@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/screens/HomeScreen.dart';
-import 'package:instagram/screens/login.dart';
 
 void main() {
   runApp(Application());
