@@ -29,10 +29,71 @@ class HomeScreen extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Column(
-            children: [getStorySection(), getPostList()],
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    barrierColor: Colors.transparent,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return DraggableScrollableSheet(
+                        maxChildSize: 0.6,
+                        initialChildSize: 0.4,
+                        minChildSize: 0.1,
+                        builder: (context, scrollController) {
+                          return getBottomSheetCotent(scrollController);
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Text('open bottom sheet'),
+              ),
+              getStorySection(),
+              getPostList()
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget getBottomSheetCotent(ScrollController scrollController) {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(255, 255, 255, 0.2),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: getGridViewContent(scrollController),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getGridViewContent(ScrollController scrollController) {
+    return GridView.builder(
+      controller: scrollController,
+      itemCount: 50,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4, crossAxisSpacing: 20, mainAxisSpacing: 20),
+      itemBuilder: (context, index) {
+        return Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+        );
+      },
     );
   }
 
