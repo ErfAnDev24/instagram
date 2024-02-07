@@ -27,10 +27,10 @@ class HomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color(0xff1C1F2E),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ElevatedButton(
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: ElevatedButton(
                 onPressed: () {
                   showModalBottomSheet(
                     backgroundColor: Colors.transparent,
@@ -51,10 +51,19 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: Text('open bottom sheet'),
               ),
-              getStorySection(),
-              getPostList()
-            ],
-          ),
+            ),
+            SliverToBoxAdapter(
+              child: getStorySection(),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: 9,
+                (context, index) {
+                  return getPost();
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
