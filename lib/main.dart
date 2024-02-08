@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/screens/HomeScreen.dart';
+import 'package:instagram/screens/shareScreen.dart';
 
 void main() {
   runApp(Application());
@@ -21,6 +21,6 @@ class Application extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: HomeScreen());
+        home: ShareScreen());
   }
 }
