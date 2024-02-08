@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ShareScreen extends StatelessWidget {
   ShareScreen({super.key});
@@ -19,7 +20,38 @@ class ShareScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: getHorizonScroll(),
         ),
+        getQuiltedGrid(),
       ]),
+    );
+  }
+
+  Widget getQuiltedGrid() {
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      sliver: SliverGrid(
+        delegate: SliverChildBuilderDelegate(childCount: 10, (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                  image: AssetImage('images/search_${index + 1}.png'),
+                  fit: BoxFit.cover),
+            ),
+          );
+        }),
+        gridDelegate: SliverQuiltedGridDelegate(
+            crossAxisCount: 3,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            repeatPattern: QuiltedGridRepeatPattern.inverted,
+            pattern: [
+              QuiltedGridTile(2, 1),
+              QuiltedGridTile(2, 2),
+              QuiltedGridTile(1, 1),
+              QuiltedGridTile(1, 1),
+              QuiltedGridTile(1, 1),
+            ]),
+      ),
     );
   }
 
