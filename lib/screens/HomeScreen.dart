@@ -38,13 +38,17 @@ class HomeScreen extends StatelessWidget {
                     context: context,
                     isScrollControlled: true,
                     builder: (context) {
-                      return DraggableScrollableSheet(
-                        maxChildSize: 0.6,
-                        initialChildSize: 0.4,
-                        minChildSize: 0.1,
-                        builder: (context, scrollController) {
-                          return getBottomSheetCotent(scrollController);
-                        },
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: DraggableScrollableSheet(
+                          maxChildSize: 0.7,
+                          initialChildSize: 0.5,
+                          minChildSize: 0.1,
+                          builder: (context, scrollController) {
+                            return getBottomSheetCotent(scrollController);
+                          },
+                        ),
                       );
                     },
                   );
@@ -70,39 +74,157 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget getBottomSheetCotent(ScrollController scrollController) {
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(255, 255, 255, 0.2),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(255, 255, 255, 0.2),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: getGridViewContent(scrollController),
+              ),
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: getGridViewContent(scrollController),
+        ),
+        Positioned(
+          bottom: 20,
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text('Send'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 
   Widget getGridViewContent(ScrollController scrollController) {
-    return GridView.builder(
+    return CustomScrollView(
       controller: scrollController,
-      itemCount: 50,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, crossAxisSpacing: 20, mainAxisSpacing: 20),
-      itemBuilder: (context, index) {
-        return Container(
-          width: 100,
-          height: 100,
-          color: Colors.red,
-        );
-      },
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: Container(
+                    width: 67,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Share',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'winter'),
+                    ),
+                    Container(
+                      child: Image(
+                        image: AssetImage('images/share.png'),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Container(
+                    width: 340,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(13),
+                      color: Color.fromRGBO(255, 255, 255, 0.4),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Image(
+                            image: AssetImage('images/search.png'),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            style: TextStyle(color: Colors.white),
+                            cursorColor: Colors.white,
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: 10),
+                                hintText: 'search',
+                                hintStyle: TextStyle(color: Colors.white),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            childCount: 50,
+            (context, index) {
+              return Container(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage('images/profile.png'),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'erfan_pe...',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ]),
+              );
+            },
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              mainAxisExtent: 100),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: 80),
+        )
+      ],
     );
   }
 
