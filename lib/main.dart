@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/screens/userProfileScreen.dart';
+import 'package:instagram/screens/ActivityScreen.dart';
 
 void main() {
   runApp(Application());
@@ -21,7 +21,7 @@ class Application extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: UserProfileScreen(),
+      home: ActivityScreen(),
     );
   }
 }
