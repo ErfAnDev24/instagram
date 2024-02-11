@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/screens/AddPostScreen.dart';
+import 'package:instagram/screens/userProfileScreen.dart';
 
 void main() {
   runApp(Application());
@@ -11,16 +11,17 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 244, 54, 158),
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-            ),
+      theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color.fromARGB(255, 244, 54, 158),
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 20),
           ),
         ),
-        debugShowCheckedModeBanner: false,
-        home: AddPostScreen());
+      ),
+      debugShowCheckedModeBanner: false,
+      home: UserProfileScreen(),
+    );
   }
 }
