@@ -1,9 +1,17 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/screens/models/HighLight.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen({super.key});
+  UserProfileScreen({super.key});
 
+  List<HighLight> highLightList = [
+    HighLight('Friends', 'highlight_1.jpg'),
+    HighLight('Work', 'highlight_2.jpg'),
+    HighLight('Chadegan', 'highlight_3.jpg'),
+    HighLight('Aderan', 'highlight_4.jpg'),
+    HighLight('Artia', 'highlight_5.jpg'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -311,7 +319,7 @@ class UserProfileScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
             getStorySection(),
             SizedBox(
@@ -328,15 +336,15 @@ class UserProfileScreen extends StatelessWidget {
       height: 90,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 9,
+        itemCount: 6,
         itemBuilder: (context, index) {
-          return index == 0 ? getAddNewStoryWidget() : getStroyWidget();
+          return index == 0 ? getAddNewStoryWidget() : getStroyWidget(index);
         },
       ),
     );
   }
 
-  Widget getStroyWidget() {
+  Widget getStroyWidget(int index) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
@@ -355,21 +363,24 @@ class UserProfileScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: AssetImage('images/profile.png'),
-                  ),
+                      image: AssetImage(
+                          'images/${highLightList[index - 1].imageName}'),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
           ),
           SizedBox(
             width: 58,
-            child: Text(
-              'erfan_pezeshkpour',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11,
+            child: Center(
+              child: Text(
+                '${highLightList[index - 1].name}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -406,7 +417,7 @@ class UserProfileScreen extends StatelessWidget {
             ),
           ),
           Text(
-            'Your Story',
+            'New',
             style: TextStyle(color: Colors.white, fontSize: 11),
           ),
         ],

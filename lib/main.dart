@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/screens/MainScreen.dart';
-import 'package:instagram/screens/StartScreen.dart';
-import 'package:instagram/screens/login.dart';
 
 void main() {
   runApp(Application());
@@ -23,7 +21,7 @@ class Application extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: StartScreen(),
+      home: MainScreen(),
     );
   }
 }

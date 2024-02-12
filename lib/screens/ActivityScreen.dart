@@ -22,32 +22,28 @@ class _ActivityScreenState extends State<ActivityScreen>
   @override
   void initState() {
     activityListNew = [
-      Activity('fateme_rafie', 'story_1.png', UserStates.like.name,
+      Activity('kobe_bryant', 'kobe_profile.png', UserStates.like.name,
           '2 mins ago', false),
-      Activity('ehsanpezeshkpour', 'story_4.png', UserStates.like.name,
+      Activity('leo_messi', 'messi_profile.png', UserStates.like.name,
           '3 mins ago', false),
-      Activity('payamzahedi95', 'story_3.png', UserStates.mention.name,
+      Activity('ali_karimi', 'ali_profile.png', UserStates.mention.name,
           '5 mins ago', false),
     ];
 
     activityListToday = [
-      Activity('sepehr_kashanchi', 'story_5.png',
-          UserStates.follow_followed.name, '4h ago', true),
-      Activity('nahid_sheykhi', 'story_2.png', UserStates.like.name, '10h ago',
-          true),
-      Activity('alireza_rahbari', 'stroy_6.png',
+      Activity('ali_daei', 'daei_profile.png', UserStates.follow_followed.name,
+          '4h ago', true),
+      Activity('taylor_swift', 'taylor_profile.png',
+          UserStates.follow_NOT_followed.name, '10h ago', true),
+      Activity('cristiano', 'ronaldo_profile.png',
           UserStates.follow_followed.name, '12h ago', true),
-      Activity('negar_habibi', 'stroy_8.png',
-          UserStates.follow_NOT_followed.name, '16h ago', true),
     ];
 
     activityListThisWeek = [
-      Activity('shiva_sheykhi', 'stroy_7.png', UserStates.mention.name,
+      Activity('middle_east_bank', 'meb_profile.png', UserStates.mention.name,
           '1 week ago', true),
-      Activity('shadi_shirinbeik', 'stroy_9.png',
-          UserStates.follow_NOT_followed.name, '50', false),
-      Activity('Ali_karimi', 'story_10.png', UserStates.like.name, '1 week ago',
-          true),
+      Activity('addle', 'addle_profile.png',
+          UserStates.follow_NOT_followed.name, '16h ago', true),
     ];
     super.initState();
   }
@@ -102,7 +98,20 @@ class _ActivityScreenState extends State<ActivityScreen>
                           return Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 15),
-                            child: getRow(activityListNew![index]),
+                            child: Row(children: [
+                              Container(
+                                width: 5,
+                                height: 5,
+                                margin: EdgeInsets.only(right: 15),
+                                decoration: BoxDecoration(
+                                    color: Color(0xffF35383),
+                                    shape: BoxShape.circle),
+                              ),
+                              Container(
+                                width: 350,
+                                child: getRow(activityListNew![index]),
+                              ),
+                            ]),
                           );
                         },
                       ),
@@ -122,7 +131,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        childCount: 4,
+                        childCount: 3,
                         (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -147,7 +156,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        childCount: 3,
+                        childCount: 2,
                         (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -181,7 +190,20 @@ class _ActivityScreenState extends State<ActivityScreen>
                           return Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 15),
-                            child: getRow(activityListNew![index]),
+                            child: Row(children: [
+                              Container(
+                                width: 5,
+                                height: 5,
+                                margin: EdgeInsets.only(right: 15),
+                                decoration: BoxDecoration(
+                                    color: Color(0xffF35383),
+                                    shape: BoxShape.circle),
+                              ),
+                              Container(
+                                width: 350,
+                                child: getRow(activityListNew![index]),
+                              ),
+                            ]),
                           );
                         },
                       ),
@@ -201,7 +223,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        childCount: 4,
+                        childCount: 3,
                         (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -226,7 +248,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                        childCount: 3,
+                        childCount: 2,
                         (context, index) {
                           return Padding(
                             padding: EdgeInsets.symmetric(
@@ -252,15 +274,14 @@ class _ActivityScreenState extends State<ActivityScreen>
         return Container(
           child: Row(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xffF35383),
-                  ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                      image: AssetImage('images/${activity.imageNumber}'),
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(
@@ -322,15 +343,14 @@ class _ActivityScreenState extends State<ActivityScreen>
         return Container(
           child: Row(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xffF35383),
-                  ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                      image: AssetImage('images/${activity.imageNumber}'),
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(
@@ -389,15 +409,14 @@ class _ActivityScreenState extends State<ActivityScreen>
         return Container(
           child: Row(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xffF35383),
-                  ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                      image: AssetImage('images/${activity.imageNumber}'),
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(
@@ -453,15 +472,14 @@ class _ActivityScreenState extends State<ActivityScreen>
         return Container(
           child: Row(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xffF35383),
-                  ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  image: DecorationImage(
+                      image: AssetImage('images/${activity.imageNumber}'),
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(

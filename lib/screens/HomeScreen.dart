@@ -2,9 +2,37 @@ import 'dart:ui';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/screens/models/post.dart';
+import 'package:instagram/screens/models/stroy.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  List<Post> postList = [
+    Post('erfan_pezeshkpour', 'myProfile_3.png', 'profile.png', 'ErfAn',
+        '10.2M', '3.5M'),
+    Post('cristiano_ronaldo', 'ronaldo_post.png', 'ronaldo_profile.png',
+        'Ronaldo', '4.2M', '1.5M'),
+    Post('taylor_swift', 'taylor_post.png', 'taylor_profile.png', 'Taylor',
+        '2.4M', '5.6K'),
+    Post('leo_messi', 'messi_post.png', 'messi_profile.png', 'Leo', '7.8M',
+        '1.8M'),
+    Post('kobe_bryant', 'kobe_post.png', 'kobe_profile.png', 'Kobe', '9.3M',
+        '2.8M'),
+    Post('ali_karimi', 'ali_post.png', 'ali_profile.png', 'Ali', '2M', '88.4k'),
+  ];
+
+  List<Story> storyList = [
+    Story('leonadro_dicaprio', 'leo_profile.png'),
+    Story('addle', 'addle_profile.png'),
+    Story('kobe_bryant', 'kobe_profile.png'),
+    Story('ali_daei', 'daei_profile.png'),
+    Story('leo_messi', 'messi_profile.png'),
+    Story('cristiano', 'ronaldo_profile.png'),
+    Story('ali_karimi', 'ali_profile.png'),
+    Story('middle_east_bank', 'meb_profile.png'),
+    Story('taylor_swift', 'taylor_profile.png'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +89,9 @@ class HomeScreen extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                childCount: 9,
+                childCount: postList.length,
                 (context, index) {
-                  return getPost();
+                  return getPost(index);
                 },
               ),
             ),
@@ -191,7 +219,7 @@ class HomeScreen extends StatelessWidget {
         ),
         SliverGrid(
           delegate: SliverChildBuilderDelegate(
-            childCount: 50,
+            childCount: 9,
             (context, index) {
               return Container(
                 child: Column(
@@ -203,13 +231,18 @@ class HomeScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: AssetImage('images/profile.png'),
+                            image: AssetImage(
+                                'images/${storyList[index].imageName}'),
                           ),
                         ),
                       ),
-                      Text(
-                        'erfan_pe...',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      SizedBox(
+                        width: 60,
+                        child: Text(
+                          '${storyList[index].name}',
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ]),
               );
@@ -234,22 +267,22 @@ class HomeScreen extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 9,
       itemBuilder: (context, index) {
-        return getPost();
+        return getPost(index);
       },
     );
   }
 
-  Widget getPost() {
+  Widget getPost(int index) {
     return Column(children: [
       SizedBox(
         height: 20,
       ),
-      getPostHeader(),
-      getPostContent()
+      getPostHeader(index),
+      getPostContent(index)
     ]);
   }
 
-  Widget getPostContent() {
+  Widget getPostContent(int index) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
       child: SizedBox(
@@ -264,7 +297,7 @@ class HomeScreen extends StatelessWidget {
                 height: 394,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/postImage.png'),
+                      image: AssetImage('images/${postList[index].imageName}'),
                       fit: BoxFit.cover),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -307,7 +340,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                '2.6k',
+                                '${postList[index].like}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
@@ -323,7 +356,7 @@ class HomeScreen extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                '1.5k',
+                                '${postList[index].comments}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
@@ -347,12 +380,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget getPostHeader() {
+  Widget getPostHeader(int index) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         children: [
-          getProfile(),
+          getProfile(index),
           SizedBox(
             width: 15,
           ),
@@ -360,7 +393,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'erfan_pezshkpour',
+                '${postList[index].username}',
                 style: TextStyle(
                     color: Colors.white, fontFamily: 'winter', fontSize: 18),
               ),
@@ -368,7 +401,7 @@ class HomeScreen extends StatelessWidget {
                 height: 3,
               ),
               Text(
-                'ErfAn',
+                '${postList[index].name}',
                 style: TextStyle(color: Colors.white),
               ),
             ],
@@ -382,7 +415,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget getProfile() {
+  Widget getProfile(int index) {
     return DottedBorder(
       borderType: BorderType.RRect,
       radius: Radius.circular(17),
@@ -396,8 +429,8 @@ class HomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
-              image: AssetImage('images/profile.png'),
-            ),
+                image: AssetImage('images/${postList[index].profileName}'),
+                fit: BoxFit.cover),
           ),
         ),
       ),
@@ -411,17 +444,18 @@ class HomeScreen extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 9,
         itemBuilder: (context, index) {
-          return index == 0 ? getAddNewStoryWidget() : getStroyWidget();
+          return index == 0 ? getAddNewStoryWidget() : getStroyWidget(index);
         },
       ),
     );
   }
 
-  Widget getStroyWidget() {
+  Widget getStroyWidget(int index) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           DottedBorder(
             borderType: BorderType.RRect,
@@ -436,21 +470,23 @@ class HomeScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: AssetImage('images/profile.png'),
-                  ),
+                      image: AssetImage('images/${storyList[index].imageName}'),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
           ),
           SizedBox(
             width: 58,
-            child: Text(
-              'erfan_pezeshkpour',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 11,
+            child: Center(
+              child: Text(
+                '${storyList[index].name}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
